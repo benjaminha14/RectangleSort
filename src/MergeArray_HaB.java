@@ -1,82 +1,63 @@
-/**
- * Created by benha on 10/26/16.
- */
-public class MergeArray_HaB {
-    public static void main(String[] args) {
-        MergeArray array = new MergeArray();
+public class MergeArray_HaB{
+    public static main (String[] args) {
+        
     }
 }
 
-class MergeArray {
-    int[] arrayOne;
-    int[] arrayTwo;
-    int[] array;
-    public MergeArray() {
-        arrayOne = generateArray();
-        arrayTwo = generateArray();
-        array = merge(arrayOne,arrayTwo);
-        System.out.println("Array 1");
-        for(int i : arrayOne) {
-            System.out.print (i + " ");
-        }
-        System.out.println("");
-        System.out.println("Arrary 2");
-        for(int i : arrayTwo) {
-            System.out.print (i + " ");
-        }
-        System.out.println("");
-        System.out.println("Result");
-        for(int i : array) {
-            System.out.print (i + " ");
-        }
+class Rectangle extends JComponent{
+    int height = 0;
+    int width = 0;
+    static int incrementX = 150;
+    int posX = 0;
+    int posY = 100;
+    Rectangle2D.Double rectangle;
+    public Rectangle() {
+        height = (int)(Math.random()*100+10);
+        width = 25;
+        rectangle = new Rectangle2D.Double( incrementX, posY, width, height);
+        posX +=  incrementX + width + 10;
+        
     }
-
-    public int[] generateArray() {
-        int[] array = new int[(int)(Math.random()*(1100-900)+900)];
-        int min = array[0];
-        int max = (int)(Math.random()*10);
-        for(int i = 0; i < array.length; i++) {
-        //    array[i] = Math.random()
-            int newNumber = (int)(Math.random()*(max-min)+min);
-            array[i] = newNumber;
-            min = newNumber;
-            max = (int)(Math.random()*(min+10-min)+min+1);
-        }
-        return array;
+    
+    public Rectangle(int width, int height) {
+        this.height = height;
+        this.width = width;
+        rectangle = new Rectangle2D.Double( incrementX, posY, width, height);
+        posX += width + 10;
     }
-
-    public int[] merge(int[] arrayOne, int[] arrayTwo) {
-        int[] newArray = new int[arrayOne.length+arrayTwo.length];
-        int i = 0, j = 0, k = 0;
-        while (i < arrayOne.length && j < arrayTwo.length)
-        {
-            if (arrayOne[i] < arrayTwo[j])
-            {
-                newArray[k] = arrayOne[i];
-                i++;
-            }
-            else
-            {
-                newArray[k] = arrayTwo[j];
-                j++;
-            }
-            k++;
-        }
-
-        while (i < arrayOne.length)
-        {
-            newArray[k] = arrayOne[i];
-            i++;
-            k++;
-        }
-
-        while (j < arrayTwo.length)
-        {
-            newArray[k] = arrayTwo[j];
-            j++;
-            k++;
-        }
-        return newArray;
-
+    
+    public void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.GREEN);
+        g2.fill(rectangle);
     }
+    
+    int newPosX = 0;
+    public void move(int posX) {
+        newPosX = posX;
+        while (newPosX < posX) {
+            new java.util.Timer().schedule(
+                                           new java.util.TimerTask() {
+                @Override
+                public void run() {
+                    toMove();
+                }
+            },
+                                           1000
+                                           );
+        }
+        
+    }
+    
+    private void toMove() {
+        System.out.println("Moving")
+        posX+= 5;
+        rectangle = new Rectangle2D.Double( posX, posY, width, height);
+        
+    }
+    
+    
+    
+    
+    
 }
