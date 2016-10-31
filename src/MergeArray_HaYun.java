@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-public class MergeArray_HaB {
+public class MergeArray_HaYun {
     static JFrame frame;
 	
 	public static void main (String[] args) throws InterruptedException {     
